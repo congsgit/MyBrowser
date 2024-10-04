@@ -109,8 +109,10 @@ namespace MyBrowser
             this.ResumeLayout(false);
             this.PerformLayout();
 
+
             //init
             HtmlArea.getHtmlArea().init(htmlRich, statusLabel);
+            refresh();
         }
 
         #endregion

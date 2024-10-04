@@ -1,7 +1,6 @@
 H:\cong\myindustry\MyBrowser\MyBrowser\bin\Debug\MyBrowser.exe.config
 H:\cong\myindustry\MyBrowser\MyBrowser\bin\Debug\MyBrowser.exe
 H:\cong\myindustry\MyBrowser\MyBrowser\bin\Debug\MyBrowser.pdb
-H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.csproj.AssemblyReference.cache
 H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.Form1.resources
 H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.Properties.Resources.resources
 H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.csproj.GenerateResource.cache
