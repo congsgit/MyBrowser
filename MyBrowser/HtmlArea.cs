@@ -15,19 +15,15 @@ namespace MyBrowser
     {
         private HttpClient client;
         private static HtmlArea htmlArea = new HtmlArea();
-        private RichTextBox htmlRich;
-        private Label statusLabel;
-        private ListBox historyListBox;
+        private Form1 form1;
 
         private HtmlArea()
         {
             client = new HttpClient();
         }
 
-        public void init(RichTextBox htmlRich, Label statusLabel, ListBox historyListBox) {
-            this.htmlRich = htmlRich;
-            this.statusLabel = statusLabel;
-            this.historyListBox = historyListBox;
+        public void init(Form1 form1) {
+            this.form1 = form1;
         }
 
         public static HtmlArea getHtmlArea()
@@ -44,18 +40,18 @@ namespace MyBrowser
                 
                 HttpResponseMessage response = await client.GetAsync(url);
                 int statusCodeInt = (int)response.StatusCode;
-                statusLabel.Text = statusCodeInt + " " + response.StatusCode.ToString();
+                form1.setStatus(statusCodeInt + " " + response.StatusCode.ToString());
                 Console.WriteLine(statusCodeInt + " " + response.StatusCode.ToString());
 
                 response.EnsureSuccessStatusCode(); // Throw if not a success code.
 
                 string responseBody = await response.Content.ReadAsStringAsync();
                 string title = getTitle(responseBody);
-                this.htmlRich.Text = responseBody;
+                form1.setHtmlRich(responseBody); 
 
                 //save history to file
                 HistoryForSave.getInstance().save(DateTime.Now, title, url);
-                refreshHistoryListBox();
+                form1.refreshHistoryListBox();
             }
             catch (HttpRequestException e)
             {
@@ -65,8 +61,8 @@ namespace MyBrowser
 
         private void clear()
         {
-            this.statusLabel.Text = "";
-            this.htmlRich.Text = "";
+            form1.setStatus("");
+            form1.setHtmlRich("");
         }
 
         private string getTitle(string response)
@@ -107,21 +103,10 @@ namespace MyBrowser
                 result += " " + url + "\n";
             }
 
-            this.htmlRich.Text = result;
+            form1.setHtmlRich(result);
         }
 
-        private void refreshHistoryListBox()
-        {
-            historyListBox.Items.Clear();
-
-            List<HistoryRowData> list = HistoryForSave.getInstance().historyRowList;
-            for (int i = list.Count - 1; i >= 0; i--)
-            {
-                HistoryRowData row = list[i];
-                historyListBox.Items.Add(row.dateTime + " " + row.title + " " + row.url);
-            }
-
-        }
+        
 
     }
 }

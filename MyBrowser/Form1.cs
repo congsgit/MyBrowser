@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
+using MyBrowser.Data;
 
 
 
@@ -18,14 +19,12 @@ namespace MyBrowser
 {
     public partial class Form1 : Form
     {
-        private HtmlArea htmlArea;
-
         public Form1()
         {
             InitializeComponent();
 
             //init
-            HtmlArea.getHtmlArea().init(htmlRich, statusLabel, historyListBox);
+            HtmlArea.getHtmlArea().init(this);
             refresh();
         }
 
@@ -74,7 +73,28 @@ namespace MyBrowser
 
         }
 
-        
+        public void setStatus(string str)
+        {
+            statusLabel.Text = str;
+        }
+
+        public void setHtmlRich(string str)
+        {
+            htmlRich.Text = str;
+        }
+
+        public void refreshHistoryListBox()
+        {
+            historyListBox.Items.Clear();
+
+            List<HistoryRowData> list = HistoryForSave.getInstance().historyRowList;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                HistoryRowData row = list[i];
+                historyListBox.Items.Add(row.dateTime + " " + row.title + " " + row.url);
+            }
+        }
+
 
         private void downloadBtn_Click(object sender, EventArgs e)
         {
