@@ -7,3 +7,7 @@ H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.csproj.GenerateResour
 H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.csproj.CoreCompileInputs.cache
 H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.exe
 H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.pdb
+H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.csproj.AssemblyReference.cache
+H:\cong\myindustry\MyBrowser\MyBrowser\bin\Debug\Newtonsoft.Json.dll
+H:\cong\myindustry\MyBrowser\MyBrowser\bin\Debug\Newtonsoft.Json.xml
+H:\cong\myindustry\MyBrowser\MyBrowser\obj\Debug\MyBrowser.csproj.CopyComplete

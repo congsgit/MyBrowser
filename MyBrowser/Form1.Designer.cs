@@ -36,6 +36,7 @@ namespace MyBrowser
             this.htmlRich = new System.Windows.Forms.RichTextBox();
             this.statusLabel = new System.Windows.Forms.Label();
             this.downloadBtn = new System.Windows.Forms.Button();
+            this.historyListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // urlBox
@@ -81,7 +82,7 @@ namespace MyBrowser
             this.htmlRich.Location = new System.Drawing.Point(35, 65);
             this.htmlRich.Name = "htmlRich";
             this.htmlRich.ReadOnly = true;
-            this.htmlRich.Size = new System.Drawing.Size(992, 349);
+            this.htmlRich.Size = new System.Drawing.Size(753, 349);
             this.htmlRich.TabIndex = 4;
             this.htmlRich.Text = "hello world";
             // 
@@ -96,7 +97,7 @@ namespace MyBrowser
             // 
             // downloadBtn
             // 
-            this.downloadBtn.Location = new System.Drawing.Point(900, 23);
+            this.downloadBtn.Location = new System.Drawing.Point(846, 23);
             this.downloadBtn.Name = "downloadBtn";
             this.downloadBtn.Size = new System.Drawing.Size(75, 23);
             this.downloadBtn.TabIndex = 6;
@@ -104,11 +105,21 @@ namespace MyBrowser
             this.downloadBtn.UseVisualStyleBackColor = true;
             this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
             // 
+            // historyListBox
+            // 
+            this.historyListBox.FormattingEnabled = true;
+            this.historyListBox.Location = new System.Drawing.Point(808, 65);
+            this.historyListBox.Name = "historyListBox";
+            this.historyListBox.Size = new System.Drawing.Size(246, 355);
+            this.historyListBox.TabIndex = 7;
+            this.historyListBox.SelectedIndexChanged += new System.EventHandler(this.historyListBox_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 470);
+            this.Controls.Add(this.historyListBox);
             this.Controls.Add(this.downloadBtn);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.htmlRich);
@@ -132,6 +143,7 @@ namespace MyBrowser
         private System.Windows.Forms.RichTextBox htmlRich;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button downloadBtn;
+        private System.Windows.Forms.ListBox historyListBox;
     }
 }
 

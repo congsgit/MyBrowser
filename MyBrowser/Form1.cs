@@ -13,6 +13,7 @@ using System.Net.Http;
 
 
 
+
 namespace MyBrowser
 {
     public partial class Form1 : Form
@@ -24,9 +25,8 @@ namespace MyBrowser
             InitializeComponent();
 
             //init
-            HtmlArea.getHtmlArea().init(htmlRich, statusLabel);
+            HtmlArea.getHtmlArea().init(htmlRich, statusLabel, historyListBox);
             refresh();
-
         }
 
         private void urlBox_TextChanged(object sender, EventArgs e)
@@ -45,7 +45,6 @@ namespace MyBrowser
             History history = History.getInstance();
             history.moveNext();
             refresh();
-            
         }
 
         private void urlBoxKeyDown(object sender, KeyEventArgs e)
@@ -75,6 +74,8 @@ namespace MyBrowser
 
         }
 
+        
+
         private void downloadBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -98,6 +99,21 @@ namespace MyBrowser
 
         }
 
+        private void historyListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if an item is selected
+            if (historyListBox.SelectedItem != null)
+            {
+                string selectedLine = historyListBox.SelectedItem.ToString();
+                MessageBox.Show("You selected: " + selectedLine);
+            }
+        }
+
         
+
+        private void historyBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
