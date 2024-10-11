@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
 
 
 
@@ -21,7 +23,10 @@ namespace MyBrowser
         {
             InitializeComponent();
 
-           
+            //init
+            HtmlArea.getHtmlArea().init(htmlRich, statusLabel);
+            refresh();
+
         }
 
         private void urlBox_TextChanged(object sender, EventArgs e)
@@ -69,5 +74,30 @@ namespace MyBrowser
             HtmlArea.getHtmlArea().renderUrl(history.getCurUrl());
 
         }
+
+        private void downloadBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.Filter = "Text files (*.txt)|*.txt";
+
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = dialog.FileName;
+
+                try
+                {
+                    string[] allLines = File.ReadAllLines(filePath);
+                    HtmlArea.getHtmlArea().renderDownloadUrls(allLines);
+                    
+                } catch(Exception ex)
+                {
+                    MessageBox.Show("Error when reading file:" + ex.Message);
+                }
+            }
+
+        }
+
+        
     }
 }

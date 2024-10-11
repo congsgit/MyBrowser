@@ -56,5 +56,40 @@ namespace MyBrowser
             }
         }
 
+        public async void renderDownloadUrls(string[] urls)
+        {
+            string result = "";
+            foreach (string url in urls)
+            {
+                try
+                {
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Head, url);
+                    HttpResponseMessage response = await client.SendAsync(request);
+
+                    result += response.StatusCode;
+                    if(response.IsSuccessStatusCode)
+                    {
+                        if(response.Content.Headers.Contains("Content-Length"))
+                        {
+                            long fileSize = response.Content.Headers.ContentLength ?? 0;
+                            result += " " + fileSize + " bytes";   
+                        }
+                        else
+                        {
+                            result += " Can't find Content-Length in header";
+                        }
+                    }
+                } catch(Exception ex)
+                {
+                    result += "Error when request:"+url;
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+
+                result += " " + url + "\n";
+            }
+
+            this.htmlRich.Text = result;
+        }
+
     }
 }

@@ -35,6 +35,7 @@ namespace MyBrowser
             this.bookmarkButton = new System.Windows.Forms.Button();
             this.htmlRich = new System.Windows.Forms.RichTextBox();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.downloadBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // urlBox
@@ -93,11 +94,22 @@ namespace MyBrowser
             this.statusLabel.TabIndex = 5;
             this.statusLabel.Text = "status";
             // 
+            // downloadBtn
+            // 
+            this.downloadBtn.Location = new System.Drawing.Point(900, 23);
+            this.downloadBtn.Name = "downloadBtn";
+            this.downloadBtn.Size = new System.Drawing.Size(75, 23);
+            this.downloadBtn.TabIndex = 6;
+            this.downloadBtn.Text = "download";
+            this.downloadBtn.UseVisualStyleBackColor = true;
+            this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 470);
+            this.Controls.Add(this.downloadBtn);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.htmlRich);
             this.Controls.Add(this.bookmarkButton);
@@ -109,10 +121,6 @@ namespace MyBrowser
             this.ResumeLayout(false);
             this.PerformLayout();
 
-
-            //init
-            HtmlArea.getHtmlArea().init(htmlRich, statusLabel);
-            refresh();
         }
 
         #endregion
@@ -123,6 +131,7 @@ namespace MyBrowser
         private System.Windows.Forms.Button bookmarkButton;
         private System.Windows.Forms.RichTextBox htmlRich;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button downloadBtn;
     }
 }
 
