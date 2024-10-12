@@ -29,6 +29,13 @@ namespace MyBrowser
             favouriteListView.Columns.Add("name", 100);
             favouriteListView.Columns.Add("url", 300);
 
+            historyListView.MultiSelect = false;
+            historyListView.FullRowSelect = true;
+            historyListView.View = View.Details;
+            historyListView.Columns.Add("time", 120);
+            historyListView.Columns.Add("title", 80);
+            historyListView.Columns.Add("url", 150);
+
             //init
             FavouriteForSave.getInstance().init(this);
             History.getInstance().setListener(this);
@@ -50,7 +57,9 @@ namespace MyBrowser
             statusLabel.Text = msg.codeAndStatus;
             titleTextBox.Text = msg.title;
 
-            refreshHistoryListBox();
+            refreshHistoryListView();
+
+            favourBtn.Enabled = true;
         }
 
         private void urlBox_TextChanged(object sender, EventArgs e)
@@ -80,17 +89,23 @@ namespace MyBrowser
                 History history = History.getInstance();
                 history.newPage(urlBox.Text.Trim());
             }
+
+            //unable the favour button no matter which key was pressed
+            favourBtn.Enabled = false;
         }
 
-        public void refreshHistoryListBox()
+        public void refreshHistoryListView()
         {
-            historyListBox.Items.Clear();
+            historyListView.Items.Clear();
 
             List<HistoryRowData> list = HistoryForSave.getInstance().historyRowList;
             for (int i = list.Count - 1; i >= 0; i--)
             {
                 HistoryRowData row = list[i];
-                historyListBox.Items.Add(row.dateTime + " " + row.title + " " + row.url);
+                ListViewItem item = new ListViewItem(row.dateTime.ToString());
+                item.SubItems.Add(row.title);
+                item.SubItems.Add(row.url);
+                historyListView.Items.Add(item);
             }
         }
 
@@ -118,15 +133,6 @@ namespace MyBrowser
 
         }
 
-        private void historyListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Check if an item is selected
-            if (historyListBox.SelectedItem != null)
-            {
-                string selectedLine = historyListBox.SelectedItem.ToString();
-                MessageBox.Show("You selected: " + selectedLine);
-            }
-        }
 
 
 
@@ -199,6 +205,30 @@ namespace MyBrowser
             }
         }
 
-        
+        private void historyMouseHover(object sender, EventArgs e)
+        {
+            historyListView.Cursor = Cursors.Hand;
+        }
+
+        private void historyMouseLeave(object sender, EventArgs e)
+        {
+            historyListView.Cursor = Cursors.Default;
+        }
+
+        private void historyItemActivate(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void historySelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (historyListView.SelectedItems.Count > 0)
+            {
+                ListViewItem item = historyListView.SelectedItems[0];
+
+                string url = item.SubItems[2].Text;
+                History.getInstance().newPage(url);
+            }
+        }
     }
 }

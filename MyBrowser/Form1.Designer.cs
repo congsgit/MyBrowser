@@ -36,7 +36,6 @@ namespace MyBrowser
             this.htmlRich = new System.Windows.Forms.RichTextBox();
             this.statusLabel = new System.Windows.Forms.Label();
             this.downloadBtn = new System.Windows.Forms.Button();
-            this.historyListBox = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.favouriteListView = new System.Windows.Forms.ListView();
@@ -44,6 +43,7 @@ namespace MyBrowser
             this.editBtn = new System.Windows.Forms.Button();
             this.goBtn = new System.Windows.Forms.Button();
             this.titleTextBox = new System.Windows.Forms.TextBox();
+            this.historyListView = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -115,18 +115,9 @@ namespace MyBrowser
             this.downloadBtn.UseVisualStyleBackColor = true;
             this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
             // 
-            // historyListBox
-            // 
-            this.historyListBox.FormattingEnabled = true;
-            this.historyListBox.Location = new System.Drawing.Point(24, 25);
-            this.historyListBox.Name = "historyListBox";
-            this.historyListBox.Size = new System.Drawing.Size(246, 381);
-            this.historyListBox.TabIndex = 7;
-            this.historyListBox.SelectedIndexChanged += new System.EventHandler(this.historyListBox_SelectedIndexChanged);
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.historyListBox);
+            this.groupBox1.Controls.Add(this.historyListView);
             this.groupBox1.Location = new System.Drawing.Point(601, 65);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(290, 421);
@@ -197,11 +188,24 @@ namespace MyBrowser
             this.titleTextBox.Size = new System.Drawing.Size(498, 20);
             this.titleTextBox.TabIndex = 10;
             // 
+            // historyListView
+            // 
+            this.historyListView.HideSelection = false;
+            this.historyListView.Location = new System.Drawing.Point(14, 25);
+            this.historyListView.Name = "historyListView";
+            this.historyListView.Size = new System.Drawing.Size(261, 381);
+            this.historyListView.TabIndex = 8;
+            this.historyListView.UseCompatibleStateImageBehavior = false;
+            this.historyListView.ItemActivate += new System.EventHandler(this.historyItemActivate);
+            this.historyListView.SelectedIndexChanged += new System.EventHandler(this.historySelectedIndexChanged);
+            this.historyListView.MouseLeave += new System.EventHandler(this.historyMouseLeave);
+            this.historyListView.MouseHover += new System.EventHandler(this.historyMouseHover);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 545);
+            this.ClientSize = new System.Drawing.Size(1273, 497);
             this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.downloadBtn);
@@ -231,7 +235,6 @@ namespace MyBrowser
         private System.Windows.Forms.RichTextBox htmlRich;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button downloadBtn;
-        private System.Windows.Forms.ListBox historyListBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button goBtn;
@@ -239,6 +242,7 @@ namespace MyBrowser
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.ListView favouriteListView;
         private System.Windows.Forms.TextBox titleTextBox;
+        private System.Windows.Forms.ListView historyListView;
     }
 }
 

@@ -96,7 +96,7 @@ namespace MyBrowser
             return curNode.next != null;
         }
 
-        public async void fetchUrl(string url)
+        private async void fetchUrl(string url)
         {
             try
             {
