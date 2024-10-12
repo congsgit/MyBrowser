@@ -32,11 +32,20 @@ namespace MyBrowser
             this.urlBox = new System.Windows.Forms.TextBox();
             this.prevButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
-            this.bookmarkButton = new System.Windows.Forms.Button();
+            this.favourBtn = new System.Windows.Forms.Button();
             this.htmlRich = new System.Windows.Forms.RichTextBox();
             this.statusLabel = new System.Windows.Forms.Label();
             this.downloadBtn = new System.Windows.Forms.Button();
             this.historyListBox = new System.Windows.Forms.ListBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.favouriteListView = new System.Windows.Forms.ListView();
+            this.deleteBtn = new System.Windows.Forms.Button();
+            this.editBtn = new System.Windows.Forms.Button();
+            this.goBtn = new System.Windows.Forms.Button();
+            this.titleTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // urlBox
@@ -68,28 +77,29 @@ namespace MyBrowser
             this.nextButton.UseVisualStyleBackColor = true;
             this.nextButton.Click += new System.EventHandler(this.next_Click);
             // 
-            // bookmarkButton
+            // favourBtn
             // 
-            this.bookmarkButton.Location = new System.Drawing.Point(752, 25);
-            this.bookmarkButton.Name = "bookmarkButton";
-            this.bookmarkButton.Size = new System.Drawing.Size(75, 23);
-            this.bookmarkButton.TabIndex = 3;
-            this.bookmarkButton.Text = "favor";
-            this.bookmarkButton.UseVisualStyleBackColor = true;
+            this.favourBtn.Location = new System.Drawing.Point(752, 25);
+            this.favourBtn.Name = "favourBtn";
+            this.favourBtn.Size = new System.Drawing.Size(75, 23);
+            this.favourBtn.TabIndex = 3;
+            this.favourBtn.Text = "favour";
+            this.favourBtn.UseVisualStyleBackColor = true;
+            this.favourBtn.Click += new System.EventHandler(this.favourBtn_Click);
             // 
             // htmlRich
             // 
-            this.htmlRich.Location = new System.Drawing.Point(35, 65);
+            this.htmlRich.Location = new System.Drawing.Point(35, 105);
             this.htmlRich.Name = "htmlRich";
             this.htmlRich.ReadOnly = true;
-            this.htmlRich.Size = new System.Drawing.Size(753, 349);
+            this.htmlRich.Size = new System.Drawing.Size(560, 381);
             this.htmlRich.TabIndex = 4;
             this.htmlRich.Text = "hello world";
             // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(32, 437);
+            this.statusLabel.Location = new System.Drawing.Point(548, 77);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(35, 13);
             this.statusLabel.TabIndex = 5;
@@ -108,27 +118,105 @@ namespace MyBrowser
             // historyListBox
             // 
             this.historyListBox.FormattingEnabled = true;
-            this.historyListBox.Location = new System.Drawing.Point(808, 65);
+            this.historyListBox.Location = new System.Drawing.Point(24, 25);
             this.historyListBox.Name = "historyListBox";
-            this.historyListBox.Size = new System.Drawing.Size(246, 355);
+            this.historyListBox.Size = new System.Drawing.Size(246, 381);
             this.historyListBox.TabIndex = 7;
             this.historyListBox.SelectedIndexChanged += new System.EventHandler(this.historyListBox_SelectedIndexChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.historyListBox);
+            this.groupBox1.Location = new System.Drawing.Point(601, 65);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(290, 421);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "History";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.favouriteListView);
+            this.groupBox2.Controls.Add(this.deleteBtn);
+            this.groupBox2.Controls.Add(this.editBtn);
+            this.groupBox2.Controls.Add(this.goBtn);
+            this.groupBox2.Location = new System.Drawing.Point(897, 65);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(364, 421);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Favourite";
+            // 
+            // favouriteListView
+            // 
+            this.favouriteListView.HideSelection = false;
+            this.favouriteListView.Location = new System.Drawing.Point(16, 25);
+            this.favouriteListView.Name = "favouriteListView";
+            this.favouriteListView.Size = new System.Drawing.Size(246, 381);
+            this.favouriteListView.TabIndex = 4;
+            this.favouriteListView.UseCompatibleStateImageBehavior = false;
+            this.favouriteListView.SelectedIndexChanged += new System.EventHandler(this.favouriteSelectedIndexChanged);
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Location = new System.Drawing.Point(268, 242);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteBtn.TabIndex = 3;
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
+            // editBtn
+            // 
+            this.editBtn.Location = new System.Drawing.Point(268, 189);
+            this.editBtn.Name = "editBtn";
+            this.editBtn.Size = new System.Drawing.Size(75, 23);
+            this.editBtn.TabIndex = 2;
+            this.editBtn.Text = "Edit";
+            this.editBtn.UseVisualStyleBackColor = true;
+            this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
+            // 
+            // goBtn
+            // 
+            this.goBtn.Location = new System.Drawing.Point(268, 136);
+            this.goBtn.Name = "goBtn";
+            this.goBtn.Size = new System.Drawing.Size(75, 23);
+            this.goBtn.TabIndex = 1;
+            this.goBtn.Text = "Go";
+            this.goBtn.UseVisualStyleBackColor = true;
+            this.goBtn.Click += new System.EventHandler(this.goBtn_Click);
+            // 
+            // titleTextBox
+            // 
+            this.titleTextBox.Enabled = false;
+            this.titleTextBox.Location = new System.Drawing.Point(35, 74);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.ReadOnly = true;
+            this.titleTextBox.Size = new System.Drawing.Size(498, 20);
+            this.titleTextBox.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 470);
-            this.Controls.Add(this.historyListBox);
+            this.ClientSize = new System.Drawing.Size(1273, 545);
+            this.Controls.Add(this.titleTextBox);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.downloadBtn);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.htmlRich);
-            this.Controls.Add(this.bookmarkButton);
+            this.Controls.Add(this.favourBtn);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.prevButton);
             this.Controls.Add(this.urlBox);
+            this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Shown += new System.EventHandler(this.shown);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,11 +227,18 @@ namespace MyBrowser
         private System.Windows.Forms.TextBox urlBox;
         private System.Windows.Forms.Button prevButton;
         private System.Windows.Forms.Button nextButton;
-        private System.Windows.Forms.Button bookmarkButton;
+        private System.Windows.Forms.Button favourBtn;
         private System.Windows.Forms.RichTextBox htmlRich;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button downloadBtn;
         private System.Windows.Forms.ListBox historyListBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button goBtn;
+        private System.Windows.Forms.Button editBtn;
+        private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.ListView favouriteListView;
+        private System.Windows.Forms.TextBox titleTextBox;
     }
 }
 

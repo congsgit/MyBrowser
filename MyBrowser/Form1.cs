@@ -12,20 +12,45 @@ using System.Net.Http;
 using MyBrowser.Data;
 
 
-
+using MyBrowser.Msg;
 
 
 namespace MyBrowser
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, UrlFetchedListener
     {
         public Form1()
         {
             InitializeComponent();
 
+            favouriteListView.MultiSelect = false;
+            favouriteListView.FullRowSelect = true;
+            favouriteListView.View = View.Details;
+            favouriteListView.Columns.Add("name", 100);
+            favouriteListView.Columns.Add("url", 300);
+
             //init
-            HtmlArea.getHtmlArea().init(this);
-            refresh();
+            FavouriteForSave.getInstance().init(this);
+            History.getInstance().setListener(this);
+        }
+
+        private void shown(object sender, EventArgs e)
+        {
+            FavouriteForSave.getInstance().load();
+            History.getInstance().load();
+        }
+
+        //handle the custimized event / msg
+        public void onUrlFetched(UrlFetchedMsg msg)
+        {
+            prevButton.Enabled = msg.hasPrev ? true : false;
+            nextButton.Enabled = msg.hasNext ? true : false;
+            urlBox.Text = msg.url;
+            htmlRich.Text = msg.html;
+            statusLabel.Text = msg.codeAndStatus;
+            titleTextBox.Text = msg.title;
+
+            refreshHistoryListBox();
         }
 
         private void urlBox_TextChanged(object sender, EventArgs e)
@@ -36,14 +61,12 @@ namespace MyBrowser
         {
             History history = History.getInstance();
             history.movePrev();
-            refresh();
         }
 
         private void next_Click(object sender, EventArgs e)
         {
             History history = History.getInstance();
             history.moveNext();
-            refresh();
         }
 
         private void urlBoxKeyDown(object sender, KeyEventArgs e)
@@ -54,33 +77,9 @@ namespace MyBrowser
                                            // Your logic here (e.g., process the input)
                                            //MessageBox.Show("Enter pressed: " + urlBox.Text);
 
-                //HtmlArea.getHtmlArea().renderUrl(urlBox.Text.Trim());
                 History history = History.getInstance();
                 history.newPage(urlBox.Text.Trim());
-                refresh();
             }
-        }
-
-        public void refresh()
-        {
-            History history = History.getInstance();
-     
-            prevButton.Enabled = history.hasPrev() ? true : false;
-            nextButton.Enabled = history.hasNext() ? true : false;
-
-            urlBox.Text = history.getCurUrl();
-            HtmlArea.getHtmlArea().renderUrl(history.getCurUrl());
-
-        }
-
-        public void setStatus(string str)
-        {
-            statusLabel.Text = str;
-        }
-
-        public void setHtmlRich(string str)
-        {
-            htmlRich.Text = str;
         }
 
         public void refreshHistoryListBox()
@@ -109,7 +108,7 @@ namespace MyBrowser
                 try
                 {
                     string[] allLines = File.ReadAllLines(filePath);
-                    HtmlArea.getHtmlArea().renderDownloadUrls(allLines);
+                    History.getInstance().renderDownloadUrls(allLines);
                     
                 } catch(Exception ex)
                 {
@@ -129,11 +128,77 @@ namespace MyBrowser
             }
         }
 
-        
 
-        private void historyBtn_Click(object sender, EventArgs e)
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
+
+        private void goBtn_Click(object sender, EventArgs e)
+        {
+            ListViewItem item = favouriteListView.SelectedItems[0];
+            string url = item.SubItems[1].Text;
+            History.getInstance().newPage(url);
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            //name with blank is not allowed
+            ListViewItem item = favouriteListView.SelectedItems[0];
+            FavouriteForm form = new FavouriteForm(item.SubItems[0].Text, item.SubItems[1].Text);
+            form.ShowDialog();
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            ListViewItem item = favouriteListView.SelectedItems[0];
+            string url = item.SubItems[1].Text;
+            FavouriteForSave.getInstance().remove(url);
+        }
+
+        private void favourBtn_Click(object sender, EventArgs e)
+        {
+            FavouriteForSave.getInstance().save(History.getInstance().getCurTitle(), History.getInstance().getCurUrl());
+        }
+
+        public void refreshFavouriteListView()
+        {
+            favouriteListView.Items.Clear();
+
+            List<FavouriteRowData> list = FavouriteForSave.getInstance().favouriteRowList;
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                FavouriteRowData row = list[i];
+                ListViewItem item = new ListViewItem(row.name);
+                item.SubItems.Add(row.url);
+                favouriteListView.Items.Add(item);
+            }
+
+            refreshFavouriteRelatedButtons();
+        }
+
+        private void favouriteSelectedIndexChanged(object sender, EventArgs e)
+        {
+            refreshFavouriteRelatedButtons();
+        }
+
+        private void refreshFavouriteRelatedButtons()
+        {
+            if (favouriteListView.SelectedItems.Count > 0)
+            {
+                goBtn.Enabled = true;
+                editBtn.Enabled = true;
+                deleteBtn.Enabled = true;
+            }
+            else
+            {
+                goBtn.Enabled = false;
+                editBtn.Enabled = false;
+                deleteBtn.Enabled = false;
+            }
+        }
+
+        
     }
 }
