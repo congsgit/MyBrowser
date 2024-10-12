@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using MyBrowser.Msg;
 
+
 namespace MyBrowser
 {
     
@@ -13,7 +14,7 @@ namespace MyBrowser
     {
         private static History history = new History();
 
-        private Node curNode = new Node("http://www.google.com", "", DateTime.Now);
+        private Node curNode;
 
         // can be modified to a list
         private UrlFetchedListener listener;
@@ -29,7 +30,6 @@ namespace MyBrowser
         {
             return history;
         }
-        
 
         public void setListener(UrlFetchedListener listener)
         {
@@ -38,8 +38,10 @@ namespace MyBrowser
 
         public void load()
         {
+            curNode = new Node(Config.getInstance().getHomeUrl(), "", DateTime.Now);
             fetchUrl(curNode.url);
         }
+        
 
         //Trigger the event / send the msg to the listener
         private void trigger(UrlFetchedMsg msg)
@@ -110,7 +112,7 @@ namespace MyBrowser
                 msg.codeAndStatus = statusCodeInt + " " + response.StatusCode.ToString();
                 Console.WriteLine(statusCodeInt + " " + response.StatusCode.ToString());
 
-                response.EnsureSuccessStatusCode(); // Throw if not a success code.
+                //response.EnsureSuccessStatusCode(); // Throw if not a success code.
 
                 string responseBody = await response.Content.ReadAsStringAsync();
                 curNode.title = getTitle(responseBody);

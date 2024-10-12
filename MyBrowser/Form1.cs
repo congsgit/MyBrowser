@@ -43,6 +43,8 @@ namespace MyBrowser
 
         private void shown(object sender, EventArgs e)
         {
+            //Config need to be loaded first, other's might rely on it.
+            Config.getInstance().load();
             FavouriteForSave.getInstance().load();
             History.getInstance().load();
         }
@@ -229,6 +231,12 @@ namespace MyBrowser
                 string url = item.SubItems[2].Text;
                 History.getInstance().newPage(url);
             }
+        }
+
+        private void editHomeBtn_Click(object sender, EventArgs e)
+        {
+            EditHomeForm form = new EditHomeForm(Config.getInstance().getHomeUrl());
+            form.ShowDialog();
         }
     }
 }

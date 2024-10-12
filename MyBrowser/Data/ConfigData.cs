@@ -8,5 +8,6 @@ namespace MyBrowser.Data
 {
     class ConfigData
     {
+        public string homeUrl { get; set; }
     }
 }

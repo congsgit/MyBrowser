@@ -37,13 +37,14 @@ namespace MyBrowser
             this.statusLabel = new System.Windows.Forms.Label();
             this.downloadBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.historyListView = new System.Windows.Forms.ListView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.favouriteListView = new System.Windows.Forms.ListView();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
             this.goBtn = new System.Windows.Forms.Button();
             this.titleTextBox = new System.Windows.Forms.TextBox();
-            this.historyListView = new System.Windows.Forms.ListView();
+            this.editHomeBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +84,7 @@ namespace MyBrowser
             this.favourBtn.Name = "favourBtn";
             this.favourBtn.Size = new System.Drawing.Size(75, 23);
             this.favourBtn.TabIndex = 3;
-            this.favourBtn.Text = "favour";
+            this.favourBtn.Text = "Favour";
             this.favourBtn.UseVisualStyleBackColor = true;
             this.favourBtn.Click += new System.EventHandler(this.favourBtn_Click);
             // 
@@ -99,7 +100,7 @@ namespace MyBrowser
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(548, 77);
+            this.statusLabel.Location = new System.Drawing.Point(487, 77);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(35, 13);
             this.statusLabel.TabIndex = 5;
@@ -107,11 +108,11 @@ namespace MyBrowser
             // 
             // downloadBtn
             // 
-            this.downloadBtn.Location = new System.Drawing.Point(846, 23);
+            this.downloadBtn.Location = new System.Drawing.Point(862, 25);
             this.downloadBtn.Name = "downloadBtn";
             this.downloadBtn.Size = new System.Drawing.Size(75, 23);
             this.downloadBtn.TabIndex = 6;
-            this.downloadBtn.Text = "download";
+            this.downloadBtn.Text = "Download";
             this.downloadBtn.UseVisualStyleBackColor = true;
             this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
             // 
@@ -125,6 +126,19 @@ namespace MyBrowser
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "History";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // historyListView
+            // 
+            this.historyListView.HideSelection = false;
+            this.historyListView.Location = new System.Drawing.Point(14, 25);
+            this.historyListView.Name = "historyListView";
+            this.historyListView.Size = new System.Drawing.Size(261, 381);
+            this.historyListView.TabIndex = 8;
+            this.historyListView.UseCompatibleStateImageBehavior = false;
+            this.historyListView.ItemActivate += new System.EventHandler(this.historyItemActivate);
+            this.historyListView.SelectedIndexChanged += new System.EventHandler(this.historySelectedIndexChanged);
+            this.historyListView.MouseLeave += new System.EventHandler(this.historyMouseLeave);
+            this.historyListView.MouseHover += new System.EventHandler(this.historyMouseHover);
             // 
             // groupBox2
             // 
@@ -185,27 +199,25 @@ namespace MyBrowser
             this.titleTextBox.Location = new System.Drawing.Point(35, 74);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.ReadOnly = true;
-            this.titleTextBox.Size = new System.Drawing.Size(498, 20);
+            this.titleTextBox.Size = new System.Drawing.Size(432, 20);
             this.titleTextBox.TabIndex = 10;
             // 
-            // historyListView
+            // editHomeBtn
             // 
-            this.historyListView.HideSelection = false;
-            this.historyListView.Location = new System.Drawing.Point(14, 25);
-            this.historyListView.Name = "historyListView";
-            this.historyListView.Size = new System.Drawing.Size(261, 381);
-            this.historyListView.TabIndex = 8;
-            this.historyListView.UseCompatibleStateImageBehavior = false;
-            this.historyListView.ItemActivate += new System.EventHandler(this.historyItemActivate);
-            this.historyListView.SelectedIndexChanged += new System.EventHandler(this.historySelectedIndexChanged);
-            this.historyListView.MouseLeave += new System.EventHandler(this.historyMouseLeave);
-            this.historyListView.MouseHover += new System.EventHandler(this.historyMouseHover);
+            this.editHomeBtn.Location = new System.Drawing.Point(981, 25);
+            this.editHomeBtn.Name = "editHomeBtn";
+            this.editHomeBtn.Size = new System.Drawing.Size(75, 23);
+            this.editHomeBtn.TabIndex = 11;
+            this.editHomeBtn.Text = "Edit Home";
+            this.editHomeBtn.UseVisualStyleBackColor = true;
+            this.editHomeBtn.Click += new System.EventHandler(this.editHomeBtn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1273, 497);
+            this.Controls.Add(this.editHomeBtn);
             this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.downloadBtn);
@@ -217,7 +229,7 @@ namespace MyBrowser
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MyBrowser";
             this.Shown += new System.EventHandler(this.shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -243,6 +255,7 @@ namespace MyBrowser
         private System.Windows.Forms.ListView favouriteListView;
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.ListView historyListView;
+        private System.Windows.Forms.Button editHomeBtn;
     }
 }
 
