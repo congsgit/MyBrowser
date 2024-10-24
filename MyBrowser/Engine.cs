@@ -9,11 +9,15 @@ using MyBrowser.Msg;
 
 namespace MyBrowser
 {
-    
-    class History
+    /**
+     * Handles HTTP communication and navigation operations by maintaining a doubly linked list.
+     * Notify the MainForm to refresh when the HTTP response is received.
+     */
+    class Engine
     {
-        private static History history = new History();
+        private static Engine engine = new Engine();
 
+        // history for navigate
         private Node curNode;
 
         // can be modified to a list
@@ -21,14 +25,14 @@ namespace MyBrowser
 
         private HttpClient client;
 
-        private History()
+        private Engine()
         {
             client = new HttpClient();
         }
 
-        public static History getInstance()
+        public static Engine getInstance()
         {
-            return history;
+            return engine;
         }
 
         public void setListener(UrlFetchedListener listener)

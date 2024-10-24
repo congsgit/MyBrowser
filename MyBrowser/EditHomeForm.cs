@@ -25,8 +25,16 @@ namespace MyBrowser
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            Config.getInstance().saveHomeUrl(homeTextBox.Text.Trim());
-            this.Close();
+            string url = homeTextBox.Text.Trim();
+            if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            {
+                Config.getInstance().saveHomeUrl(url);
+                this.Close();
+            } else
+            {
+                MessageBox.Show("The URL is not legal!");
+            }
+                
         }
     }
 }

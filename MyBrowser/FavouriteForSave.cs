@@ -17,7 +17,7 @@ namespace MyBrowser
 
         private static FavouriteForSave favouriteForSave = new FavouriteForSave();
 
-        private Form1 form1;
+        private MainForm form1;
 
         public List<FavouriteRowData> favouriteRowList { get; set; }
 
@@ -30,7 +30,7 @@ namespace MyBrowser
             return favouriteForSave;
         }
 
-        public void init(Form1 form1)
+        public void init(MainForm form1)
         {
             this.form1 = form1;
         }

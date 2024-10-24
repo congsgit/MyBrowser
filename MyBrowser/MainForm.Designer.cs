@@ -1,7 +1,7 @@
 ﻿
 namespace MyBrowser
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -93,7 +93,7 @@ namespace MyBrowser
             this.htmlRich.Location = new System.Drawing.Point(35, 105);
             this.htmlRich.Name = "htmlRich";
             this.htmlRich.ReadOnly = true;
-            this.htmlRich.Size = new System.Drawing.Size(560, 381);
+            this.htmlRich.Size = new System.Drawing.Size(560, 501);
             this.htmlRich.TabIndex = 4;
             this.htmlRich.Text = "hello world";
             // 
@@ -121,7 +121,7 @@ namespace MyBrowser
             this.groupBox1.Controls.Add(this.historyListView);
             this.groupBox1.Location = new System.Drawing.Point(601, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(290, 421);
+            this.groupBox1.Size = new System.Drawing.Size(290, 541);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "History";
@@ -132,7 +132,7 @@ namespace MyBrowser
             this.historyListView.HideSelection = false;
             this.historyListView.Location = new System.Drawing.Point(14, 25);
             this.historyListView.Name = "historyListView";
-            this.historyListView.Size = new System.Drawing.Size(261, 381);
+            this.historyListView.Size = new System.Drawing.Size(261, 502);
             this.historyListView.TabIndex = 8;
             this.historyListView.UseCompatibleStateImageBehavior = false;
             this.historyListView.ItemActivate += new System.EventHandler(this.historyItemActivate);
@@ -148,7 +148,7 @@ namespace MyBrowser
             this.groupBox2.Controls.Add(this.goBtn);
             this.groupBox2.Location = new System.Drawing.Point(897, 65);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(364, 421);
+            this.groupBox2.Size = new System.Drawing.Size(364, 541);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Favourite";
@@ -158,14 +158,14 @@ namespace MyBrowser
             this.favouriteListView.HideSelection = false;
             this.favouriteListView.Location = new System.Drawing.Point(16, 25);
             this.favouriteListView.Name = "favouriteListView";
-            this.favouriteListView.Size = new System.Drawing.Size(246, 381);
+            this.favouriteListView.Size = new System.Drawing.Size(246, 502);
             this.favouriteListView.TabIndex = 4;
             this.favouriteListView.UseCompatibleStateImageBehavior = false;
             this.favouriteListView.SelectedIndexChanged += new System.EventHandler(this.favouriteSelectedIndexChanged);
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(268, 242);
+            this.deleteBtn.Location = new System.Drawing.Point(268, 310);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(75, 23);
             this.deleteBtn.TabIndex = 3;
@@ -175,7 +175,7 @@ namespace MyBrowser
             // 
             // editBtn
             // 
-            this.editBtn.Location = new System.Drawing.Point(268, 189);
+            this.editBtn.Location = new System.Drawing.Point(268, 257);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(75, 23);
             this.editBtn.TabIndex = 2;
@@ -185,7 +185,7 @@ namespace MyBrowser
             // 
             // goBtn
             // 
-            this.goBtn.Location = new System.Drawing.Point(268, 136);
+            this.goBtn.Location = new System.Drawing.Point(268, 204);
             this.goBtn.Name = "goBtn";
             this.goBtn.Size = new System.Drawing.Size(75, 23);
             this.goBtn.TabIndex = 1;
@@ -212,11 +212,11 @@ namespace MyBrowser
             this.editHomeBtn.UseVisualStyleBackColor = true;
             this.editHomeBtn.Click += new System.EventHandler(this.editHomeBtn_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 497);
+            this.ClientSize = new System.Drawing.Size(1273, 643);
             this.Controls.Add(this.editHomeBtn);
             this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.groupBox2);
@@ -228,7 +228,7 @@ namespace MyBrowser
             this.Controls.Add(this.prevButton);
             this.Controls.Add(this.urlBox);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "MyBrowser";
             this.Shown += new System.EventHandler(this.shown);
             this.groupBox1.ResumeLayout(false);

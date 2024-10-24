@@ -17,9 +17,9 @@ using MyBrowser.Msg;
 
 namespace MyBrowser
 {
-    public partial class Form1 : Form, UrlFetchedListener
+    public partial class MainForm : Form, UrlFetchedListener
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -38,7 +38,7 @@ namespace MyBrowser
 
             //init
             FavouriteForSave.getInstance().init(this);
-            History.getInstance().setListener(this);
+            Engine.getInstance().setListener(this);
         }
 
         private void shown(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace MyBrowser
             //Config need to be loaded first, other's might rely on it.
             Config.getInstance().load();
             FavouriteForSave.getInstance().load();
-            History.getInstance().load();
+            Engine.getInstance().load();
         }
 
         //handle the custimized event / msg
@@ -70,14 +70,12 @@ namespace MyBrowser
 
         private void prev_Click(object sender, EventArgs e)
         {
-            History history = History.getInstance();
-            history.movePrev();
+            Engine.getInstance().movePrev();
         }
 
         private void next_Click(object sender, EventArgs e)
         {
-            History history = History.getInstance();
-            history.moveNext();
+            Engine.getInstance().moveNext();
         }
 
         private void urlBoxKeyDown(object sender, KeyEventArgs e)
@@ -88,8 +86,15 @@ namespace MyBrowser
                                            // Your logic here (e.g., process the input)
                                            //MessageBox.Show("Enter pressed: " + urlBox.Text);
 
-                History history = History.getInstance();
-                history.newPage(urlBox.Text.Trim());
+                string url = urlBox.Text.Trim();
+                if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                {
+                    Engine.getInstance().newPage(url);
+                } else
+                {
+                    MessageBox.Show("The URL is not legal!");
+                }
+                    
             }
 
             //unable the favour button no matter which key was pressed
@@ -125,7 +130,7 @@ namespace MyBrowser
                 try
                 {
                     string[] allLines = File.ReadAllLines(filePath);
-                    History.getInstance().renderDownloadUrls(allLines);
+                    Engine.getInstance().renderDownloadUrls(allLines);
                     
                 } catch(Exception ex)
                 {
@@ -147,7 +152,7 @@ namespace MyBrowser
         {
             ListViewItem item = favouriteListView.SelectedItems[0];
             string url = item.SubItems[1].Text;
-            History.getInstance().newPage(url);
+            Engine.getInstance().newPage(url);
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -167,7 +172,7 @@ namespace MyBrowser
 
         private void favourBtn_Click(object sender, EventArgs e)
         {
-            FavouriteForSave.getInstance().save(History.getInstance().getCurTitle(), History.getInstance().getCurUrl());
+            FavouriteForSave.getInstance().save(Engine.getInstance().getCurTitle(), Engine.getInstance().getCurUrl());
         }
 
         public void refreshFavouriteListView()
@@ -229,7 +234,7 @@ namespace MyBrowser
                 ListViewItem item = historyListView.SelectedItems[0];
 
                 string url = item.SubItems[2].Text;
-                History.getInstance().newPage(url);
+                Engine.getInstance().newPage(url);
             }
         }
 
